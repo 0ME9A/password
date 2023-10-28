@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0%;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+
+main {
+  min-height: 100vh;
+}
+
 .App {
   text-align: center;
 }
@@ -32,6 +43,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
