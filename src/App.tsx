@@ -1,6 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useMemo, useState } from "react";
 
+import PasswordGenerator from "./components/password/PasswordGenerator";
 import ThemeSwitch from "./components/switch/ThemeSwitch";
 import ColorModeContext from "./context/ThemeContext";
 import Box from "@mui/material/Box";
@@ -35,11 +36,14 @@ export default function App() {
             sx={{
               bgcolor: "background.default",
               color: "text.primary",
-              p: 3,
+              py: 3,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               minHeight: "100vh",
             }}
           >
-            <ThemeSwitch />
+            <PasswordGenerator />
           </Box>
         </main>
       </ThemeProvider>
