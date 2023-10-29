@@ -139,7 +139,6 @@ function PasswordGenerator() {
               padding: 2,
             }}
           >
-            
             <Typography
               variant="h1"
               sx={{

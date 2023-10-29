@@ -1,15 +1,20 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Suspense, lazy, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-import InitialLoading from "./components/Loading/InitialLoading";
 import ColorModeContext from "./context/ThemeContext";
-import Box from "@mui/material/Box";
+import NotFound from "./components/Error/NotFound";
+import Main from "./main";
 
 import "./App.css";
 
-const PasswordGenerator = lazy(
-  () => import("./components/password/PasswordGenerator")
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+    errorElement: <NotFound />,
+  },
+]);
 
 export default function App() {
   const [mode, setMode] = useState<"light" | "dark">("dark");
@@ -34,24 +39,7 @@ export default function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <main>
-          <Box
-            sx={{
-              bgcolor: "background.default",
-              color: "text.primary",
-              py: 3,
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              alignItems: "center",
-              minHeight: "100vh",
-            }}
-          >
-            <Suspense fallback={<InitialLoading />}>
-              <PasswordGenerator />
-            </Suspense>
-          </Box>
-        </main>
+        <RouterProvider router={router} />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
