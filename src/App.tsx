@@ -1,11 +1,15 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useMemo, useState } from "react";
+import { Suspense, lazy, useMemo, useState } from "react";
 
-import PasswordGenerator from "./components/password/PasswordGenerator";
+import InitialLoading from "./components/Loading/InitialLoading";
 import ColorModeContext from "./context/ThemeContext";
 import Box from "@mui/material/Box";
 
 import "./App.css";
+
+const PasswordGenerator = lazy(
+  () => import("./components/password/PasswordGenerator")
+);
 
 export default function App() {
   const [mode, setMode] = useState<"light" | "dark">("dark");
@@ -38,11 +42,14 @@ export default function App() {
               py: 3,
               display: "flex",
               justifyContent: "center",
+              flexDirection: "column",
               alignItems: "center",
               minHeight: "100vh",
             }}
           >
-            <PasswordGenerator />
+            <Suspense fallback={<InitialLoading />}>
+              <PasswordGenerator />
+            </Suspense>
           </Box>
         </main>
       </ThemeProvider>

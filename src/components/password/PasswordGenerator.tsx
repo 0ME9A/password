@@ -139,6 +139,7 @@ function PasswordGenerator() {
               padding: 2,
             }}
           >
+            
             <Typography
               variant="h1"
               sx={{
@@ -147,7 +148,7 @@ function PasswordGenerator() {
                 textAlign: "center",
               }}
             >
-              Password Generator {}
+              Password Generator
             </Typography>
 
             <ThemeSwitch />
