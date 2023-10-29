@@ -152,7 +152,7 @@ function PasswordGenerator() {
               Password Generator
             </Typography>
 
-            <Suspense >
+            <Suspense>
               <Box>
                 <TwitterShare />
                 <ThemeSwitch />
