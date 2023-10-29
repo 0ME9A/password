@@ -2,7 +2,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useMemo, useState } from "react";
 
 import PasswordGenerator from "./components/password/PasswordGenerator";
-import ThemeSwitch from "./components/switch/ThemeSwitch";
 import ColorModeContext from "./context/ThemeContext";
 import Box from "@mui/material/Box";
 
