@@ -13,7 +13,7 @@ export default function NotFound() {
       sx={{
         bgcolor: "background.default",
         color: "text.primary",
-        py: 3,
+        p: 3,
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",

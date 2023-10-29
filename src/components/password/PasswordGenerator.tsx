@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -28,8 +28,10 @@ import generatePassword from "../../utils/generatePassword";
 import copyToClipboard from "../../utils/copyToClipboard";
 import CachedIcon from "@mui/icons-material/Cached";
 import Typography from "@mui/material/Typography";
-import ThemeSwitch from "../switch/ThemeSwitch";
+import ThemeSwitch from "../buttons/ThemeSwitch";
 import Box from "@mui/material/Box";
+
+const TwitterShare = lazy(() => import("../buttons/TwitterShare"));
 
 const PrettoSlider = styled(Slider)({
   color: "rgb(0, 0, 155)",
@@ -150,7 +152,12 @@ function PasswordGenerator() {
               Password Generator
             </Typography>
 
-            <ThemeSwitch />
+            <Suspense >
+              <Box>
+                <TwitterShare />
+                <ThemeSwitch />
+              </Box>
+            </Suspense>
           </Box>
 
           <Paper

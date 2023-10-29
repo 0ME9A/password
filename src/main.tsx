@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 
-import InitialLoading from "./components/Loading/InitialLoading";
+import InitialLoading from "./components/loading/InitialLoading";
 import Box from "@mui/material/Box";
 
 const PasswordGenerator = lazy(
