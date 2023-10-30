@@ -1,21 +1,11 @@
 import { Suspense, lazy } from "react";
 
-import Typography from "@mui/material/Typography";
+import Loading from "./components/loading/loading";
 import Box from "@mui/material/Box";
 
 const PasswordGenerator = lazy(
   () => import("./components/password/PasswordGenerator")
 );
-
-function InitialLoading() {
-  return (
-    <Box>
-      <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-        Loading...
-      </Typography>
-    </Box>
-  );
-}
 
 function Main() {
   return (
@@ -30,7 +20,7 @@ function Main() {
         gap: 1,
       }}
     >
-      <Suspense fallback={<InitialLoading />}>
+      <Suspense fallback={<Loading />}>
         <Box sx={{ height: "3rem" }}></Box>
         <PasswordGenerator />
       </Suspense>
