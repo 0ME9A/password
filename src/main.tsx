@@ -21,18 +21,17 @@ function Main() {
   return (
     <Box
       sx={{
-        bgcolor: "background.default",
-        color: "text.primary",
         py: 3,
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        minHeight: "100vh",
+        height: "100%",
         gap: 1,
       }}
     >
       <Suspense fallback={<InitialLoading />}>
+        <Box sx={{ height: "3rem" }}></Box>
         <PasswordGenerator />
       </Suspense>
     </Box>

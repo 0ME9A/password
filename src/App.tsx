@@ -2,8 +2,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useMemo, useState } from "react";
 
+import InitialLoading from "./components/loading/InitialLoading";
 import ColorModeContext from "./context/ThemeContext";
 import NotFound from "./components/Error/NotFound";
+import About from "./pages/About";
+import Layout from "./layout";
 import Main from "./main";
 
 import "./App.css";
@@ -11,8 +14,20 @@ import "./App.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <Layout />,
     errorElement: <NotFound />,
+    loader: () => <InitialLoading />,
+    children: [
+      {
+        path: "/",
+        element: <Main />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      // Add more routes as children here if needed
+    ],
   },
 ]);
 

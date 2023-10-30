@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   FormLabel,
   IconButton,
+  Link,
   Paper,
   Radio,
   RadioGroup,
@@ -141,16 +142,26 @@ function PasswordGenerator() {
               padding: 2,
             }}
           >
-            <Typography
-              variant="h1"
+            <Box
               sx={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
               }}
             >
-              Password Generator
-            </Typography>
+              <img src="/logo32.png" alt="brand logo" width={24} />
+              <Typography
+                variant="h1"
+                sx={{
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Password Generator
+              </Typography>
+            </Box>
 
             <Suspense>
               <Box>
@@ -413,6 +424,15 @@ function PasswordGenerator() {
           </Paper>
         </Paper>
       </Container>
+      <Box>
+        <Typography fontSize={"0.8rem"} padding={3} sx={{ opacity: 0.7 }}>
+          Developed and designed by{" "}
+          <Link href={"https://ome9a.com"} target="_blank" rel="external">
+            Baliram Singh
+          </Link>{" "}
+          with <span style={{ color: "red" }}>❤️️</span>{" "}
+        </Typography>
+      </Box>
     </>
   );
 }
