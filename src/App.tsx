@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 import ColorModeContext from "./context/ThemeContext";
 import NotFound from "./components/Error/NotFound";
-import Loading from "./components/loading/Loading";
+import InitialScreen from "./initialScreen";
 import About from "./pages/About";
 import Layout from "./layout";
 import Main from "./main";
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     errorElement: <NotFound />,
-    loader: () => <Loading />,
+    loader: () => <InitialScreen />,
     children: [
       {
         path: "/",

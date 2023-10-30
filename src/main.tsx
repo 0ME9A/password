@@ -1,11 +1,11 @@
 import { Suspense, lazy } from "react";
 
-import Loading from "./components/loading/Loading";
+import InitialScreen from "./initialScreen";
 import Box from "@mui/material/Box";
 
 const PasswordGenerator = lazy(
   () => import("./components/password/PasswordGenerator")
-);
+  );
 
 function Main() {
   return (
@@ -20,7 +20,7 @@ function Main() {
         gap: 1,
       }}
     >
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<InitialScreen />}>
         <Box sx={{ height: "3rem" }}></Box>
         <PasswordGenerator />
       </Suspense>
