@@ -7,7 +7,6 @@ import {
   FormControlLabel,
   FormLabel,
   IconButton,
-  Link,
   Paper,
   Radio,
   RadioGroup,
@@ -15,6 +14,7 @@ import {
   Stack,
   TextField,
   styled,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import {
@@ -33,9 +33,10 @@ import ThemeSwitch from "../buttons/ThemeSwitch";
 import Box from "@mui/material/Box";
 
 const TwitterShare = lazy(() => import("../buttons/TwitterShare"));
+const Appreciate = lazy(() => import("../thanks/Appreciate"));
 
 const PrettoSlider = styled(Slider)({
-  color: "rgb(0, 0, 155)",
+  // color: "rgb(0, 0, 155)",
   height: 8,
   "& .MuiSlider-track": {
     border: "none",
@@ -60,7 +61,7 @@ const PrettoSlider = styled(Slider)({
     width: 32,
     height: 32,
     borderRadius: "50% 50% 50% 0",
-    backgroundColor: "rgb(0, 0, 155)",
+    // backgroundColor: "rgb(0, 0, 155)",
     transformOrigin: "bottom left",
     transform: "translate(50%, -100%) rotate(-45deg) scale(0)",
     "&:before": { display: "none" },
@@ -91,7 +92,16 @@ function PasswordGenerator() {
     result: "",
     message: "",
   });
+
+  const small = useMediaQuery(theme.breakpoints.down("sm"));
+  const medium = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const large = useMediaQuery(theme.breakpoints.up("lg"));
+
   const mode = theme.palette.mode;
+  const palette = theme.palette;
+  const boxShadow = `0px 3px 15px ${
+    mode === "dark" ? "rgb(150, 150, 150, .1)" : "rgb(150, 150, 150, .2)"
+  }`;
 
   const handlePP = () => {
     const x = generatePassword(pp);
@@ -129,8 +139,7 @@ function PasswordGenerator() {
           sx={{
             borderRadius: 6,
             p: 1,
-            backgroundColor:
-              mode === "dark" ? "rgb(0, 0, 25)" : "rgb(242, 244, 255)",
+            background: palette.background.default,
             opacity: 1,
           }}
         >
@@ -139,7 +148,8 @@ function PasswordGenerator() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              padding: 2,
+              py: 2,
+              px: small ? 1 : 2,
             }}
           >
             <Box
@@ -175,22 +185,20 @@ function PasswordGenerator() {
             elevation={0}
             sx={{
               borderRadius: 4,
-              backgroundColor:
-                mode === "dark" ? "#0F1932" : "rgb(222, 224, 246)",
+              backgroundColor: palette.background.paper,
             }}
           >
             <Stack spacing={1} sx={{ p: 1 }}>
-              <Paper
-                elevation={4}
+              <Box
                 sx={{
                   p: 1,
                   borderRadius: 2,
                   background: "transparent",
                   border: 2,
-                  borderColor: mode === "dark" ? "white" : "black",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  boxShadow: boxShadow,
                 }}
               >
                 <Typography
@@ -210,31 +218,37 @@ function PasswordGenerator() {
                     color: `${isCopy ? "green" : ""}`,
                   }}
                 >
-                  <ContentPasteIcon sx={{}} />
-                </IconButton>{" "}
-              </Paper>
+                  <ContentPasteIcon />
+                </IconButton>
+              </Box>
 
-              <Paper
-                elevation={4}
+              <Box
                 sx={{
                   p: 2,
                   borderRadius: 2,
+                  boxShadow: boxShadow,
                 }}
               >
                 <Box
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "top",
+                    alignItems: "center",
                   }}
                 >
                   <Typography gutterBottom>Password length</Typography>
                   <Button
                     variant="contained"
                     onClick={handleReset}
-                    sx={{ gap: 1, borderRadius: 2 }}
+                    sx={{
+                      gap: 1,
+                      borderRadius: 2,
+                      minWidth: 0,
+                      p: small ? 0.5 : "auto",
+                    }}
                   >
-                    reset <RotateLeftIcon />
+                    {!small && "Reset"}
+                    <RotateLeftIcon />
                   </Button>
                 </Box>
                 <PrettoSlider
@@ -248,7 +262,7 @@ function PasswordGenerator() {
                     setPP((prev) => ({ ...prev, length: nValue }))
                   }
                 />
-              </Paper>
+              </Box>
 
               <FormControlLabel
                 control={<Checkbox />}
@@ -259,17 +273,11 @@ function PasswordGenerator() {
                   setPP((prev) => ({ ...prev, upper: !prev.upper }))
                 }
                 sx={{
-                  backgroundColor:
-                    mode === "dark" ? "rgb(0, 0, 20)" : "rgb(242, 244, 255)",
                   display: "flex",
                   justifyContent: "space-between",
                   pl: 1,
                   borderRadius: 2,
-                  boxShadow: `0px 3px 5px ${
-                    mode === "dark"
-                      ? "rgb(150, 150, 150, .1)"
-                      : "rgb(150, 150, 150, .5)"
-                  }`,
+                  boxShadow: boxShadow,
                 }}
               />
               <FormControlLabel
@@ -281,17 +289,11 @@ function PasswordGenerator() {
                   setPP((prev) => ({ ...prev, lower: !prev.lower }))
                 }
                 sx={{
-                  backgroundColor:
-                    mode === "dark" ? "rgb(0, 0, 20)" : "rgb(242, 244, 255)",
                   display: "flex",
                   justifyContent: "space-between",
                   pl: 1,
                   borderRadius: 2,
-                  boxShadow: `0px 3px 5px ${
-                    mode === "dark"
-                      ? "rgb(150, 150, 150, .1)"
-                      : "rgb(150, 150, 150, .5)"
-                  }`,
+                  boxShadow: boxShadow,
                 }}
               />
               <FormControlLabel
@@ -303,17 +305,11 @@ function PasswordGenerator() {
                   setPP((prev) => ({ ...prev, symbol: !prev.symbol }))
                 }
                 sx={{
-                  backgroundColor:
-                    mode === "dark" ? "rgb(0, 0, 20)" : "rgb(242, 244, 255)",
                   display: "flex",
                   justifyContent: "space-between",
                   pl: 1,
                   borderRadius: 2,
-                  boxShadow: `0px 3px 5px ${
-                    mode === "dark"
-                      ? "rgb(150, 150, 150, .1)"
-                      : "rgb(150, 150, 150, .5)"
-                  }`,
+                  boxShadow: boxShadow,
                 }}
               />
               <FormControlLabel
@@ -325,17 +321,11 @@ function PasswordGenerator() {
                   setPP((prev) => ({ ...prev, number: !prev.number }))
                 }
                 sx={{
-                  backgroundColor:
-                    mode === "dark" ? "rgb(0, 0, 20)" : "rgb(242, 244, 255)",
                   display: "flex",
                   justifyContent: "space-between",
                   pl: 1,
                   borderRadius: 2,
-                  boxShadow: `0px 3px 5px ${
-                    mode === "dark"
-                      ? "rgb(150, 150, 150, .1)"
-                      : "rgb(150, 150, 150, .5)"
-                  }`,
+                  boxShadow: boxShadow,
                 }}
               />
 
@@ -365,7 +355,7 @@ function PasswordGenerator() {
                 </Button>
               </Box>
               {settings && (
-                <Paper elevation={4} sx={{ borderRadius: 2, p: 1 }}>
+                <Box sx={{ borderRadius: 2, p: 1 }}>
                   <TextField
                     id="outlined-basic"
                     label="Add Salt"
@@ -407,7 +397,7 @@ function PasswordGenerator() {
                       />
                     </RadioGroup>
                   </FormControl>
-                </Paper>
+                </Box>
               )}
 
               <hr style={{ opacity: ".1" }} />
@@ -424,15 +414,9 @@ function PasswordGenerator() {
           </Paper>
         </Paper>
       </Container>
-      <Box>
-        <Typography fontSize={"0.8rem"} padding={3} sx={{ opacity: 0.7 }}>
-          Developed and designed by{" "}
-          <Link href={"https://ome9a.com"} target="_blank" rel="external">
-            Baliram Singh
-          </Link>{" "}
-          with <span style={{ color: "red" }}>❤️️</span>{" "}
-        </Typography>
-      </Box>
+      <Suspense>
+        <Appreciate />
+      </Suspense>
     </>
   );
 }

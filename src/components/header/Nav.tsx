@@ -1,4 +1,4 @@
-import { Fab, Paper, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -7,8 +7,13 @@ import Box from "@mui/material/Box";
 
 function Nav() {
   const getTheme = useTheme();
-  const theme = getTheme.palette.mode;
-
+  const {
+    palette,
+    palette: { mode },
+  } = getTheme;
+  const boxShadow = `0px 3px 15px ${
+    mode === "dark" ? "rgb(150, 150, 150, .3)" : "rgb(150, 150, 150, .5)"
+  }`;
   return (
     <Box
       sx={{
@@ -32,81 +37,47 @@ function Nav() {
         />
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Fab
-          variant="extended"
-          size="small"
-          sx={{ p: 0, borderRadius: 3, bgcolor: "transparent" }}
-        >
-          <Paper
-            elevation={6}
-            sx={{
-              borderRadius: 3,
-              display: "flex",
-              width: "100%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 1,
-              background: theme === "dark" ? "#0F1932" : "rgb(242, 244, 255)",
-              color: "primary",
-              padding: 1,
-            }}
-          >
-            <Link
-              to={"/about"}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: theme === "dark" ? "white" : "black",
-              }}
-            >
-              <GroupsIcon sx={{}} />
-            </Link>
-          </Paper>
-        </Fab>
-        <Paper
-          elevation={6}
+        <Box
           sx={{
             borderRadius: 3,
-            display: "flex",
+            padding: 1,
+            boxShadow: boxShadow,
+            bgcolor: palette.background.default,
           }}
         >
-          <Fab
-            variant="extended"
-            size="small"
-            sx={{ p: 0, borderRadius: 3, bgcolor: "transparent" }}
+          <Link
+            to={"/about"}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: palette.text.primary,
+            }}
           >
-            <Paper
-              elevation={6}
-              sx={{
-                borderRadius: 3,
-                display: "flex",
-                width: "100%",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: 1,
-                background: theme === "dark" ? "#0F1932" : "rgb(242, 244, 255)",
-                color: "primary",
-                padding: 1,
-              }}
-            >
-              <Link
-                to={"https://github.com/0ME9A/password"}
-                target="_blank"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: theme === "dark" ? "white" : "black",
-                }}
-              >
-                <GitHubIcon sx={{}} />
-              </Link>
-            </Paper>
-          </Fab>
-        </Paper>
+            <GroupsIcon sx={{}} />
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            borderRadius: 3,
+            padding: 1,
+            boxShadow: boxShadow,
+            bgcolor: palette.background.default,
+          }}
+        >
+          <Link
+            to={"https://github.com/0ME9A/password"}
+            target="_blank"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: palette.text.primary,
+            }}
+          >
+            <GitHubIcon sx={{}} />
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
