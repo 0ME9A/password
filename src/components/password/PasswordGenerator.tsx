@@ -94,8 +94,8 @@ function PasswordGenerator() {
   });
 
   const small = useMediaQuery(theme.breakpoints.down("sm"));
-  const medium = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const large = useMediaQuery(theme.breakpoints.up("lg"));
+  // const medium = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  // const large = useMediaQuery(theme.breakpoints.up("lg"));
 
   const mode = theme.palette.mode;
   const palette = theme.palette;
