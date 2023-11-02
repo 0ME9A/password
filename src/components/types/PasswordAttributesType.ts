@@ -14,4 +14,20 @@ type PasswordReturnType = {
   message: string;
 };
 
-export type { PasswordAttributesType, PasswordReturnType };
+interface PasswordStrengthType {
+  message: string;
+  color: string;
+  level: number;
+}
+
+interface ProPasswordReturnType {
+  password: string;
+  strength: PasswordStrengthType;
+}
+
+export type {
+  PasswordAttributesType,
+  PasswordReturnType,
+  PasswordStrengthType,
+  ProPasswordReturnType,
+};

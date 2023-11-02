@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import {
   PasswordAttributesType,
-  PasswordReturnType,
+  ProPasswordReturnType,
 } from "../types/PasswordAttributesType";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -30,6 +30,7 @@ import copyToClipboard from "../../utils/copyToClipboard";
 import CachedIcon from "@mui/icons-material/Cached";
 import Typography from "@mui/material/Typography";
 import ThemeSwitch from "../buttons/ThemeSwitch";
+import InfoIcon from "@mui/icons-material/Info";
 import Box from "@mui/material/Box";
 
 const TwitterShare = lazy(() => import("../buttons/TwitterShare"));
@@ -61,7 +62,6 @@ const PrettoSlider = styled(Slider)({
     width: 32,
     height: 32,
     borderRadius: "50% 50% 50% 0",
-    // backgroundColor: "rgb(0, 0, 155)",
     transformOrigin: "bottom left",
     transform: "translate(50%, -100%) rotate(-45deg) scale(0)",
     "&:before": { display: "none" },
@@ -87,10 +87,13 @@ function PasswordGenerator() {
     saltAt: "e",
   });
   const [isCopy, setCopy] = useState(false);
-  const [password, setPassword] = useState<PasswordReturnType>({
-    status: "success",
-    result: "",
-    message: "",
+  const [password, setPassword] = useState<ProPasswordReturnType>({
+    password: "",
+    strength: {
+      message: "",
+      color: "",
+      level: 0,
+    },
   });
 
   const small = useMediaQuery(theme.breakpoints.down("sm"));
@@ -107,7 +110,6 @@ function PasswordGenerator() {
     const x = generatePassword(pp);
     setPassword(x);
     setCopy(false);
-    console.log(x);
   };
   const handleReset = () => {
     setPP((prev) => ({
@@ -123,7 +125,7 @@ function PasswordGenerator() {
     setCopy(false);
   };
   const handleCopy = async () => {
-    const x = await copyToClipboard(password.result);
+    const x = await copyToClipboard(password.password);
     setCopy(x);
 
     setTimeout(() => {
@@ -205,7 +207,7 @@ function PasswordGenerator() {
                   variant="body1"
                   sx={{ fontSize: "1rem", fontWeight: "bold" }}
                 >
-                  {password.result}
+                  {password.password}
                 </Typography>
                 <IconButton
                   onClick={handleCopy}
@@ -216,12 +218,22 @@ function PasswordGenerator() {
                     minWidth: "0",
                     borderRadius: 2,
                     color: `${isCopy ? "green" : ""}`,
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
                   <ContentPasteIcon />
                 </IconButton>
               </Box>
-
+              <Typography
+                variant="body2"
+                px={1}
+                color={password.strength.color}
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+              >
+                {password.strength.message && <InfoIcon />}
+                {password.strength.message}
+              </Typography>
               <Box
                 sx={{
                   p: 2,
@@ -236,7 +248,22 @@ function PasswordGenerator() {
                     alignItems: "center",
                   }}
                 >
-                  <Typography gutterBottom>Password length</Typography>
+                  <div>
+                    Password length{" "}
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        display: "inline",
+                        fontWeight: "bold",
+                        bgcolor: palette.text.primary,
+                        color: palette.background.default,
+                        p: 0.5,
+                        borderRadius: "100%",
+                      }}
+                    >
+                      {pp.length}
+                    </Typography>
+                  </div>
                   <Button
                     variant="contained"
                     onClick={handleReset}
@@ -245,6 +272,7 @@ function PasswordGenerator() {
                       borderRadius: 2,
                       minWidth: 0,
                       p: small ? 0.5 : "auto",
+                      fontWeight: "bold",
                     }}
                   >
                     {!small && "Reset"}
@@ -257,13 +285,17 @@ function PasswordGenerator() {
                   value={pp.length}
                   min={1}
                   max={32}
-                  sx={{ pt: 3 }}
+                  sx={{
+                    pt: 3,
+                    ".MuiSlider-valueLabel": {
+                      backgroundColor: palette.primary.main,
+                    },
+                  }}
                   onChange={(e, nValue) =>
                     setPP((prev) => ({ ...prev, length: nValue }))
                   }
                 />
               </Box>
-
               <FormControlLabel
                 control={<Checkbox />}
                 label="Uppercase (A-Z)"
@@ -328,7 +360,6 @@ function PasswordGenerator() {
                   boxShadow: boxShadow,
                 }}
               />
-
               <Box
                 sx={{
                   display: "flex",
@@ -399,9 +430,7 @@ function PasswordGenerator() {
                   </FormControl>
                 </Box>
               )}
-
               <hr style={{ opacity: ".1" }} />
-
               <Button
                 variant="contained"
                 endIcon={<CachedIcon />}

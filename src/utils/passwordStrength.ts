@@ -1,18 +1,18 @@
-interface PasswordStrength {
-  message: string;
-  color: string;
-  level: number;
-}
+import { PasswordStrengthType } from "../components/types/PasswordAttributesType";
 
-const getPasswordStrength = (password: string): PasswordStrength => {
+const passwordStrength = (password: string): PasswordStrengthType => {
+  const RED = "#FF0000";
+  const ORANGE = "#F94C10";
+  const YELLOW = "#FED049";
+  const GREEN = "#82CD47";
+  const DARK_GREEN = "#379237";
+
   let score = 0;
   const regexChecks: RegExp[] = [
     /[A-Z]/, // Uppercase letters
     /[a-z]/, // Lowercase letters
     /[0-9]/, // Numbers
     /[^A-Za-z0-9]/, // Symbols
-    /^.{8,}$/, // Minimum 8 characters
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])/, // Complex requirements
   ];
 
   regexChecks.forEach((regex) => {
@@ -21,27 +21,46 @@ const getPasswordStrength = (password: string): PasswordStrength => {
     }
   });
 
-  const strength: PasswordStrength = {
+  const strength: PasswordStrengthType = {
     message: "",
     color: "",
     level: score,
   };
 
-  if (score === 0) {
+  const len = password.length;
+  if (len < 3) {
     strength.message = "Very Weak";
-    strength.color = "#FF0000"; // Red
-  } else if (score === 1) {
+    strength.color = RED;
+  }
+  if (score === 1 && len <= 4) {
+    strength.message = "Very Weak";
+    strength.color = RED;
+  } else if ((score === 1 && len <= 8) || (score === 2 && len <= 4)) {
     strength.message = "Weak";
-    strength.color = "#FFA500"; // Orange
-  } else if (score === 2) {
+    strength.color = ORANGE;
+  } else if (
+    (score === 1 && len <= 12) ||
+    (score === 2 && len <= 6) ||
+    (score === 3 && len <= 4)
+  ) {
     strength.message = "Moderate";
-    strength.color = "#FFFF00"; // Yellow
-  } else if (score === 3) {
+    strength.color = YELLOW;
+  } else if (
+    (score === 1 && len <= 16) ||
+    (score === 2 && len <= 10) ||
+    (score === 3 && len <= 8) ||
+    (score === 4 && len <= 6)
+  ) {
     strength.message = "Strong";
-    strength.color = "#008000"; // Green
-  } else if (score >= 4) {
+    strength.color = GREEN;
+  } else if (
+    (score === 1 && len > 16) ||
+    (score === 2 && len > 10) ||
+    (score === 3 && len > 8) ||
+    (score === 4 && len > 6)
+  ) {
     strength.message = "Very Strong";
-    strength.color = "#006400"; // Dark Green
+    strength.color = DARK_GREEN;
   }
 
   return strength;
@@ -52,4 +71,4 @@ const getPasswordStrength = (password: string): PasswordStrength => {
 // const passwordStrength = getPasswordStrength(password);
 // console.log(passwordStrength);
 
-export default getPasswordStrength;
+export default passwordStrength;
