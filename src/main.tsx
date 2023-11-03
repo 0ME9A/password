@@ -1,13 +1,16 @@
+import { useTheme } from "@mui/material";
 import { Suspense, lazy } from "react";
 
+import useMediaQuery from "@mui/material/useMediaQuery";
 import InitialScreen from "./initialScreen";
 import Box from "@mui/material/Box";
 
-const PasswordGenerator = lazy(
-  () => import("./components/password/PasswordGenerator")
-  );
+const Home = lazy(() => import("./pages/Home"));
 
 function Main() {
+  const theme = useTheme();
+  const small = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Box
       sx={{
@@ -21,8 +24,8 @@ function Main() {
       }}
     >
       <Suspense fallback={<InitialScreen />}>
-        <Box sx={{ height: "3rem" }}></Box>
-        <PasswordGenerator />
+        <Box sx={{ height: small ? "1rem" : "3rem" }}></Box>
+        <Home />
       </Suspense>
     </Box>
   );

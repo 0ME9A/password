@@ -1,6 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 import { useMemo, useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "./RTK/store";
 
 import ColorModeContext from "./context/ThemeContext";
 import NotFound from "./components/Error/NotFound";
@@ -10,7 +13,6 @@ import Layout from "./layout";
 import Main from "./main";
 
 import "./App.css";
-import { PaletteMode } from "@mui/material";
 
 const router = createBrowserRouter([
   {
@@ -67,9 +69,11 @@ export default function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </Provider>
     </ColorModeContext.Provider>
   );
 }
