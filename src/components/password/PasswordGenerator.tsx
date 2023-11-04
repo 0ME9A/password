@@ -118,8 +118,7 @@ function PasswordGenerator() {
   };
 
   const handleCopy = async () => {
-    const x = await copyToClipboard(history[0]?.password);
-    setCopy(x);
+    setCopy(await copyToClipboard(history[0]?.password));
 
     setTimeout(() => {
       setCopy(false);
@@ -198,22 +197,25 @@ function PasswordGenerator() {
                 alignItems: "center",
               }}
             >
-              <div>
-                Password length{" "}
-                <Typography
-                  variant="body2"
-                  sx={{
-                    display: "inline",
-                    fontWeight: "bold",
-                    bgcolor: palette.text.primary,
-                    color: palette.background.default,
-                    p: 0.5,
-                    borderRadius: "100%",
+              <Typography
+                variant="h3"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  fontSize: "1rem",
+                }}
+              >
+                Password length
+                <span
+                  style={{
+                    display: "inline-block",
+                    height: "1.5rem",
+                    border: "1px solid rgb(150, 150, 150, .2)",
                   }}
-                >
-                  {pp.length}
-                </Typography>
-              </div>
+                ></span>
+                {pp.length}
+              </Typography>
               <Button
                 variant="contained"
                 onClick={handleReset}
