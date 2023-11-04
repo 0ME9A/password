@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+  IconButton,
   List,
   ListItem,
   ListItemText,
@@ -14,18 +15,47 @@ import { removeHistory } from "../RTK/slices/history";
 import { RootState } from "../RTK/store";
 import { useState } from "react";
 
+import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import WindowBack from "../components/buttons/WindowBack";
+import copyToClipboard from "../utils/copyToClipboard";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Paper from "@mui/material/Paper";
+
+interface copyHistoryItemFace {
+  id: string;
+  password: string;
+}
 
 function History() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [selectHistoryItem, setHistoryItem] = useState<string[]>([]);
+  const [copyPassword, setCopyPassword] = useState<copyHistoryItemFace>({
+    id: "",
+    password: "",
+  });
   const { history, activeWindow } = useSelector((state: RootState) => state);
   const small = useMediaQuery(theme.breakpoints.down("sm"));
 
   const palette = theme.palette;
+
+  const handleHistroyItemSelection = (historyId: string) => {
+    if (selectHistoryItem.includes(historyId)) {
+      const uncheck = selectHistoryItem.filter((id) => id !== historyId);
+      setHistoryItem(uncheck);
+    } else {
+      setHistoryItem((prev) => [...prev, historyId]);
+    }
+  };
+
+  const handleCopy = async ({ id, password }: copyHistoryItemFace) => {
+    await copyToClipboard(password);
+    setCopyPassword({ id, password });
+
+    setTimeout(() => {
+      setCopyPassword({ id: "", password: "" });
+    }, 5000);
+  };
 
   return (
     <>
@@ -59,25 +89,21 @@ function History() {
             <Typography
               variant="h2"
               sx={{
-                display: "inline",
-                fontWeight: "bold",
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
                 fontSize: "1rem",
-                pr: 1,
+                fontWeight: "bold",
               }}
             >
               History
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                display: "inline",
-                fontWeight: "bold",
-                bgcolor: palette.text.primary,
-                color: palette.background.default,
-                p: 0.5,
-                borderRadius: "100%",
-              }}
-            >
+              <span
+                style={{
+                  display: "inline-block",
+                  height: "1.5rem",
+                  border: "1px solid rgb(150, 150, 150, .2)",
+                }}
+              ></span>
               {history.length}
             </Typography>
           </Box>
@@ -111,7 +137,7 @@ function History() {
               return (
                 item.password.length > 0 && (
                   <ListItem
-                    alignItems="flex-start"
+                    alignItems="center"
                     key={i}
                     sx={{
                       borderBottom: 0.5,
@@ -156,13 +182,48 @@ function History() {
                         </>
                       }
                     />
-                    <Checkbox
-                      checked={selectHistoryItem.includes(item.time)}
-                      onChange={() =>
-                        setHistoryItem((prev) => [...prev, item.time])
-                      }
-                      inputProps={{ "aria-label": "controlled" }}
-                    />
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 2,
+                        alignItems: "center",
+                      }}
+                    >
+                      <IconButton
+                        onClick={() =>
+                          handleCopy({ id: item.time, password: item.password })
+                        }
+                        title={`${
+                          copyPassword.id === item.time ? "Copied" : "Copy"
+                        }`}
+                        sx={{
+                          p: ".5",
+                          m: 0,
+                          minWidth: "0",
+                          borderRadius: 2,
+                          color: `${
+                            copyPassword.id === item.time ? "green" : ""
+                          }`,
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ContentPasteIcon />
+                      </IconButton>
+                      <div
+                        style={{
+                          width: "1px",
+                          height: "1.5rem",
+                          backgroundColor: "rgb(150, 150, 150, .5)",
+                        }}
+                      ></div>
+                      <Checkbox
+                        checked={selectHistoryItem.includes(item.time)}
+                        onChange={() => handleHistroyItemSelection(item.time)}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    </Box>
                   </ListItem>
                 )
               );
