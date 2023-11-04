@@ -1,12 +1,22 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+interface toggleWindowFace {
+  tab?: string;
+  timer?: number;
+}
+
+const initialState: toggleWindowFace = {
+  tab: "",
+  timer: 0,
+};
+
 const toggleWindowSlice = createSlice({
   name: "toggleWindow",
-  initialState: "",
+  initialState,
   reducers: {
-    setWindowName: (state, action: PayloadAction<string>) => {
+    setWindowName: (state, action: PayloadAction<toggleWindowFace>) => {
       // This will toggle the specific key in the state
-      return action.payload;
+      return { ...state, ...action.payload };
     },
   },
 });

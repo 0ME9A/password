@@ -35,16 +35,62 @@ main {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.windowSlideStartLeft {
+  left: 0;
+  animation: SSL 0.2s 1 linear;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+.windowSlideEndLeft {
+  left: -100%;
+  animation: SEL 0.2s 1 linear;
+}
+.windowSlideStartRight {
+  left: 0;
+  animation: SSR 0.2s 1 linear;
+}
 
+.windowSlideEndRight {
+  left: 100%;
+  animation: SER 0.2s 1 linear;
+}
+
+@keyframes SSL {
+  from {
+    left: -50%;
+    opacity: 0;
+  }
   to {
-    transform: rotate(360deg);
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes SEL {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+  to {
+    left: -50%;
+    opacity: 0;
+  }
+}
+@keyframes SSR {
+  from {
+    left: 50%;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes SER {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+  to {
+    left: 50%;
+    opacity: 0;
   }
 }
