@@ -46,4 +46,4 @@ Before contributing, kindly review our [Contributing Guidelines](CONTRIBUTING.md
 
 ## License
 
-This project is licensed under the MIT License. For more details, please refer to the [LICENSE](LICENSE.md) file.
+This project is licensed under the MIT License. For more details, please refer to the [LICENSE](LICENSE) file.
