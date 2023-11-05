@@ -11,9 +11,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HistoryIcon from "@mui/icons-material/History";
 import Typography from "@mui/material/Typography";
+import Settings from "./Tabs/Settings";
+import History from "./Tabs/History";
 import Box from "@mui/material/Box";
-import Settings from "./Settings";
-import History from "./History";
 
 const TwitterShare = lazy(() => import("../components/buttons/TwitterShare"));
 
@@ -23,13 +23,14 @@ function Home() {
   const dispatch = useDispatch();
   const {
     historyProps: { bookmark },
+    activeWindow,
   } = useSelector((state: RootState) => state);
 
   const palette = theme.palette;
 
   return (
     <>
-      <Container maxWidth={"sm"}>
+      <Container maxWidth={"sm"} sx={{ p: 1 }}>
         <Paper
           elevation={8}
           sx={{
@@ -75,14 +76,14 @@ function Home() {
                 {bookmark && (
                   <IconButton
                     title="History"
-                    onClick={() => dispatch(setWindowName(HISTORY))}
+                    onClick={() => dispatch(setWindowName({ tab: HISTORY }))}
                   >
                     <HistoryIcon />
                   </IconButton>
                 )}
                 <IconButton
                   title="Settings"
-                  onClick={() => dispatch(setWindowName(SETTINGS))}
+                  onClick={() => dispatch(setWindowName({ tab: SETTINGS }))}
                 >
                   <SettingsIcon />
                 </IconButton>
@@ -99,9 +100,9 @@ function Home() {
               position: "relative",
             }}
           >
-            <PasswordGenerator />
-            <History />
-            <Settings />
+            {!activeWindow.tab && <PasswordGenerator />}
+            {activeWindow.tab === HISTORY && <History />}
+            {activeWindow.tab === SETTINGS && <Settings />}
           </Box>
           {/* --------------------- */}
         </Paper>

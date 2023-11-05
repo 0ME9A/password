@@ -5,13 +5,14 @@ import {
   ListItemText,
   useTheme,
 } from "@mui/material";
-import { toggleHistoryBookmark } from "../RTK/slices/history";
+import { toggleHistoryBookmark } from "../../RTK/slices/history";
 import { useDispatch, useSelector } from "react-redux";
-import { setSalt } from "../RTK/slices/setting";
-import { RootState } from "../RTK/store";
+import { setSalt } from "../../RTK/slices/setting";
+import { RootState } from "../../RTK/store";
+import { SETTINGS } from "../../RTK/type";
 
-import ThemeSwitch from "../components/buttons/ThemeSwitch";
-import WindowBack from "../components/buttons/WindowBack";
+import ThemeSwitch from "../../components/buttons/ThemeSwitch";
+import WindowBack from "../../components/buttons/WindowBack";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -35,14 +36,18 @@ function Settings() {
         sx={{
           borderRadius: 4,
           backgroundColor: palette.background.paper,
-          position: "absolute",
+          position: "relative",
           top: 0,
           width: "100%",
-          left: activeWindow === "settings" ? "0" : "100%",
+          // maxHeight: "600px",
+          height: "500px",
           transition: ".3s",
-          height: "100%",
-          zIndex: activeWindow === "settings" ? 5 : 0,
+          zIndex: activeWindow.tab === SETTINGS ? 5 : 0,
+          animationDuration: activeWindow.timer || 0,
         }}
+        className={`${
+          activeWindow.tab === SETTINGS && "windowSlideStartRight"
+        } ${activeWindow.timer && "windowSlideEndRight"} `}
       >
         <Box
           sx={{
@@ -64,7 +69,7 @@ function Settings() {
         </Box>
         <hr style={{ opacity: 0.1 }} />
         <Box sx={{}}>
-          <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+          <List sx={{ width: "100%" }}>
             <ListItem alignItems="flex-start">
               <ListItemText
                 primary="Theme"

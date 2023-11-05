@@ -47,6 +47,7 @@ function Nav() {
         >
           <Link
             to={"/about"}
+            title="About"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -68,6 +69,8 @@ function Nav() {
           <Link
             to={"https://github.com/0ME9A/password"}
             target="_blank"
+            title="GitHub"
+            rel="external"
             style={{
               display: "flex",
               justifyContent: "center",

@@ -8,6 +8,7 @@ import { store } from "./RTK/store";
 import ColorModeContext from "./context/ThemeContext";
 import NotFound from "./components/Error/NotFound";
 import InitialScreen from "./initialScreen";
+import History from "./pages/History";
 import About from "./pages/About";
 import Layout from "./layout";
 import Main from "./main";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/history",
+        element: <History />,
       },
       // Add more routes as children here if needed
     ],

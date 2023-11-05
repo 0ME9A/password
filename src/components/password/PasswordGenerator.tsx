@@ -100,7 +100,6 @@ function PasswordGenerator() {
     const x = generatePassword(pp);
     dispatch(addHistory({ ...x, time: t.toISOString() }));
     setCopy(false);
-    console.log(history);
   };
 
   const handleReset = () => {
@@ -135,9 +134,13 @@ function PasswordGenerator() {
           height: "100%",
           width: "100%",
           position: "relative",
-          left: activeWindow ? "-100%" : "0%",
           transition: ".3s",
+          zIndex: !activeWindow.tab ? 5 : 0,
+          animationDuration: activeWindow.timer || 0,
         }}
+        className={`${!activeWindow.tab && "windowSlideStartLeft"} ${
+          activeWindow.timer && "windowSlideEndLeft"
+        } `}
       >
         <Stack spacing={1} sx={{ p: 1 }}>
           <Box
@@ -219,6 +222,7 @@ function PasswordGenerator() {
               <Button
                 variant="contained"
                 onClick={handleReset}
+                title="Reset"
                 sx={{
                   gap: 1,
                   borderRadius: 2,
