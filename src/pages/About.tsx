@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Typography,
   Container,
@@ -8,6 +7,9 @@ import {
   List,
   ListItemText,
 } from "@mui/material";
+import { Helmet } from "react-helmet";
+
+import React from "react";
 
 const AboutPage: React.FC = () => {
   const theme = useTheme();
@@ -15,6 +17,15 @@ const AboutPage: React.FC = () => {
 
   return (
     <Container maxWidth="md" sx={{ color: palette.text.secondary }}>
+      <Helmet>
+        <title>Password Generator - About</title>
+        <meta
+          name="description"
+          content="Learn more about the Password Generator project and its features."
+        />
+        <link rel="canonical" href="https://password.ome9a.com/about" />
+      </Helmet>
+
       <Typography variant="h4" gutterBottom>
         About Us
       </Typography>

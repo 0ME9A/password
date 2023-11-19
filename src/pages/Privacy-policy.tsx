@@ -1,4 +1,5 @@
 import { Typography, Container, useTheme, Link } from "@mui/material";
+import { Helmet } from "react-helmet";
 
 import React from "react";
 
@@ -16,6 +17,18 @@ const PrivacyPolicy: React.FC<Props> = ({
 
   return (
     <Container maxWidth="md" sx={{ color: palette.text.secondary }}>
+      <Helmet>
+        <title>Password Generator - Privacy Policy</title>
+        <meta
+          name="description"
+          content="Read our Privacy Policy to understand how we handle your data securely on our website and extension."
+        />
+        <link
+          rel="canonical"
+          href="https://password.ome9a.com/privacy-policy"
+        />
+      </Helmet>
+
       <Typography variant="h4" gutterBottom>
         Privacy Policy
       </Typography>
