@@ -25,7 +25,7 @@ function Nav() {
     >
       <Box sx={{}}>
         <img
-          src="https://raw.githubusercontent.com/0ME9A/0ME9A/main/0ME9A/imgs/logo.png"
+          src="/parent_logo.png"
           alt="Parent brand logo"
           width={48}
         />
