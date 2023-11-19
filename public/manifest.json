@@ -1,6 +1,6 @@
 {
-  "short_name": "Password generator",
-  "name": "Create React App Sample",
+  "short_name": "Password",
+  "name": "Password generator",
   "version": "1.0.1",
 
   "icons": [

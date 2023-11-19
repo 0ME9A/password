@@ -7,6 +7,7 @@ import { store } from "./RTK/store";
 
 import ColorModeContext from "./context/ThemeContext";
 import NotFound from "./components/Error/NotFound";
+import PrivacyPolicy from "./pages/Privacy-policy";
 import InitialScreen from "./initialScreen";
 import History from "./pages/History";
 import About from "./pages/About";
@@ -33,6 +34,12 @@ const router = createBrowserRouter([
       {
         path: "/history",
         element: <History />,
+      },
+      {
+        path: "/privacy-policy",
+        element: (
+          <PrivacyPolicy lastUpdated={"19 Nov 2023"} contactInformation={"heyome9a@gmail.com"} />
+        ),
       },
       // Add more routes as children here if needed
     ],
