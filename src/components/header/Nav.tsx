@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GroupsIcon from "@mui/icons-material/Groups";
+import HomeIcon from "@mui/icons-material/Home";
 import Box from "@mui/material/Box";
 
 function Nav() {
@@ -37,6 +38,27 @@ function Nav() {
         />
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+      <Box
+          sx={{
+            borderRadius: 3,
+            padding: 1,
+            boxShadow: boxShadow,
+            bgcolor: palette.background.default,
+          }}
+        >
+          <Link
+            to={"/"}
+            title="About"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: palette.text.primary,
+            }}
+          >
+            <HomeIcon sx={{}} />
+          </Link>
+        </Box>
         <Box
           sx={{
             borderRadius: 3,
