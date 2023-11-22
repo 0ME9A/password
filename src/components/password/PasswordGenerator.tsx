@@ -162,6 +162,7 @@ function PasswordGenerator() {
               {history[0]?.password}
             </Typography>
             <IconButton
+              disabled={!history[0]?.password}
               onClick={handleCopy}
               title={`${isCopy ? "Copied" : "Copy"}`}
               sx={{
