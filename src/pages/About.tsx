@@ -122,7 +122,8 @@ const AboutPage: React.FC = () => {
       </Typography>
       <Typography paragraph>
         To generate passwords, visit our{" "}
-        <Link
+        <Link 
+          color="#00000"
           href="https://password.ome9a.com/"
           target="_blank"
           rel="noopener noreferrer"
@@ -132,6 +133,7 @@ const AboutPage: React.FC = () => {
         website or install our Password Generator extension for Chrome and Edge.
         For more details and installation instructions, visit our{" "}
         <Link
+          color="#00000"
           href="https://github.com/0ME9A/password"
           target="_blank"
           rel="noopener noreferrer"
@@ -149,6 +151,7 @@ const AboutPage: React.FC = () => {
         If you have any questions, feedback, or concerns, please feel free to
         reach out to us. You can contact us through our{" "}
         <Link
+          color="#00000"
           href="https://github.com/0ME9A/password"
           target="_blank"
           rel="noopener noreferrer"
@@ -156,7 +159,7 @@ const AboutPage: React.FC = () => {
           GitHub repository
         </Link>{" "}
         or via email at{" "}
-        <Link href="mailto:heyome9a@gmail.com">heyome9a@gmail.com</Link>.
+        <Link href="mailto:heyome9a@gmail.com" color="#00000">heyome9a@gmail.com</Link>.
       </Typography>
       <Typography variant="h6" gutterBottom>
         Learn More
@@ -169,6 +172,7 @@ const AboutPage: React.FC = () => {
         href="https://github.com/0ME9A/password"
         target="_blank"
         rel="noopener noreferrer"
+        color="#00000"
       >
         <Typography>GitHub Repository</Typography>
       </Link>
