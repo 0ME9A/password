@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   Checkbox,
@@ -20,6 +19,7 @@ import { PasswordAttributesType } from "../types/PasswordAttributesType";
 import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../../RTK/slices/history";
 import { RootState } from "../../RTK/store";
+import { useEffect, useState } from "react";
 
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
@@ -74,7 +74,7 @@ function PasswordGenerator() {
   const {
     history,
     activeWindow,
-    settingProps: { salt },
+    settingProps: { salt, instantCopy },
   } = useSelector((state: RootState) => state);
   const [pp, setPP] = useState<PasswordAttributesType>({
     upper: true,
@@ -97,14 +97,13 @@ function PasswordGenerator() {
 
   const handlePP = () => {
     const t = new Date();
-    const x = generatePassword(pp);
-    dispatch(addHistory({ ...x, time: t.toISOString() }));
+    const generatedPassword = generatePassword(pp);
+    dispatch(addHistory({ ...generatedPassword, time: t.toISOString() }));
     setCopy(false);
   };
 
   const handleReset = () => {
-    setPP((prev) => ({
-      ...prev,
+    setPP({
       upper: true,
       lower: true,
       symbol: true,
@@ -112,7 +111,7 @@ function PasswordGenerator() {
       length: 8,
       salt: "",
       saltAt: "e",
-    }));
+    });
     setCopy(false);
   };
 
@@ -123,6 +122,14 @@ function PasswordGenerator() {
       setCopy(false);
     }, 5000);
   };
+
+  useEffect(() => {
+    (async () => {
+      if (instantCopy && history[0]?.password) {
+        await copyToClipboard(history[0]?.password);
+      }
+    })();
+  }, [history, instantCopy, pp]);
 
   return (
     <>
@@ -164,15 +171,27 @@ function PasswordGenerator() {
             <IconButton
               disabled={!history[0]?.password}
               onClick={handleCopy}
-              title={`${isCopy ? "Copied" : "Copy"}`}
+              title={`${
+                instantCopy
+                  ? "Auto copy active || Copied"
+                  : isCopy
+                  ? "Copied"
+                  : "Copy"
+              }`}
+              style={{
+                boxShadow: instantCopy
+                  ? "0 0 5px #FFBF00, 0 0 15px #FFBF00"
+                  : "",
+              }}
               sx={{
                 p: ".5",
                 m: 0,
                 minWidth: "0",
-                borderRadius: 2,
                 color: `${isCopy ? "green" : ""}`,
                 display: "flex",
+                borderRadius: 2,
                 alignItems: "center",
+                bgcolor: `${instantCopy ? "#FFBF00" : ""}`,
               }}
             >
               <ContentPasteIcon />

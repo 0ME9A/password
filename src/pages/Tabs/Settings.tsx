@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { toggleHistoryBookmark } from "../../RTK/slices/history";
 import { useDispatch, useSelector } from "react-redux";
-import { setSalt } from "../../RTK/slices/setting";
+import { setInstantCopy, setSalt } from "../../RTK/slices/setting";
 import { RootState } from "../../RTK/store";
 import { SETTINGS } from "../../RTK/type";
 
@@ -24,7 +24,7 @@ function Settings() {
   const {
     historyProps: { bookmark },
     activeWindow,
-    settingProps: { salt },
+    settingProps: { salt, instantCopy },
   } = useSelector((state: RootState) => state);
 
   const palette = theme.palette;
@@ -67,8 +67,8 @@ function Settings() {
             </Typography>
           </Box>
         </Box>
-        <hr style={{ opacity: 0.1 }} />
-        <Box sx={{}}>
+        <hr />
+        <Box>
           <List sx={{ width: "100%" }}>
             <ListItem alignItems="flex-start">
               <ListItemText
@@ -146,6 +146,31 @@ function Settings() {
               <Checkbox
                 checked={salt}
                 onChange={() => dispatch(setSalt(!salt))}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            </ListItem>
+            <ListItem alignItems="flex-start">
+              <ListItemText
+                primary="Auto Copy"
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Auto copy password
+                    </Typography>
+                    {
+                      " — Automatically copy a newly generated password without the need for an additional click on the copy button..."
+                    }
+                  </React.Fragment>
+                }
+              />
+              <Checkbox
+                checked={instantCopy}
+                onChange={() => dispatch(setInstantCopy(!instantCopy))}
                 inputProps={{ "aria-label": "controlled" }}
               />
             </ListItem>
