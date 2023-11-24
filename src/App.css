@@ -13,6 +13,10 @@ main {
   text-align: center;
 }
 
+hr {
+  opacity: 0.1;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
