@@ -45,9 +45,7 @@ function History({ page = false }) {
 
   useEffect(() => {
     setHistoryItem([])
-      if(history.length > 0){
-        localStorage.setItem("history", JSON.stringify(history));
-      }
+    localStorage.setItem("history", JSON.stringify(history));
   }, [history]);
 
   const handleHistoryItemSelection = (historyId: string) => {

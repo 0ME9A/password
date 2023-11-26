@@ -11,8 +11,6 @@ const initialState: HistoryItem[] = localStorage.getItem("history")
   ? JSON.parse(localStorage.getItem("history") || "[]")
   : [];
 
-console.log(initialState);
-
 const historySlice = createSlice({
   name: "history",
   initialState: initialState,
