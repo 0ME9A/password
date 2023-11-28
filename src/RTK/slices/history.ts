@@ -7,9 +7,13 @@ export interface HistoryItem extends ProPasswordReturnType {
   time: string;
 }
 
+const initialState: HistoryItem[] = localStorage.getItem("history")
+  ? JSON.parse(localStorage.getItem("history") || "[]")
+  : [];
+
 const historySlice = createSlice({
   name: "history",
-  initialState: [] as HistoryItem[],
+  initialState: initialState,
   reducers: {
     addHistory: (state, action: PayloadAction<HistoryItem>) => {
       // Add the new history item to the start of the array

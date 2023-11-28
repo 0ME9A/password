@@ -16,7 +16,7 @@ import { MdOutlineZoomOutMap } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../RTK/store";
 import { HISTORY } from "../../RTK/type";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import WindowBack from "../../components/buttons/WindowBack";
@@ -43,7 +43,12 @@ function History({ page = false }) {
 
   const palette = theme.palette;
 
-  const handleHistroyItemSelection = (historyId: string) => {
+  useEffect(() => {
+    setHistoryItem([])
+    localStorage.setItem("history", JSON.stringify(history));
+  }, [history]);
+
+  const handleHistoryItemSelection = (historyId: string) => {
     if (selectHistoryItem.includes(historyId)) {
       const uncheck = selectHistoryItem.filter((id) => id !== historyId);
       setHistoryItem(uncheck);
@@ -287,7 +292,7 @@ function History({ page = false }) {
                       ></div>
                       <Checkbox
                         checked={selectHistoryItem.includes(item.time)}
-                        onChange={() => handleHistroyItemSelection(item.time)}
+                        onChange={() => handleHistoryItemSelection(item.time)}
                         inputProps={{ "aria-label": "controlled" }}
                       />
                     </Box>
