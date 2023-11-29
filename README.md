@@ -11,7 +11,7 @@ Welcome to the Password Generator! This user-friendly, React-based web applicati
 
 ## Chrome/Edge Extension
 
-Exciting news! The Password Generator now has a dedicated Chrome/Edge extension, bringing the power of password generation directly to your browser. Install it from the [Microsoft Edge Add-ons]([https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home](https://microsoftedge.microsoft.com/addons/detail/password-generator/hpjolhalbfgbjbinhpbbbdfjackpbcnf)) for a seamless experience.
+Exciting news! The Password Generator now has a dedicated Chrome/Edge extension, bringing the power of password generation directly to your browser. Install it from the [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/password-generator/hpjolhalbfgbjbinhpbbbdfjackpbcnf) for a seamless experience.
 
 ## Getting Started
 
