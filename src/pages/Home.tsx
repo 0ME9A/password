@@ -6,7 +6,6 @@ import { RootState } from "../RTK/store";
 import { Suspense, lazy } from "react";
 
 import PasswordGenerator from "../components/password/PasswordGenerator";
-import Appreciate from "../components/thanks/Appreciate";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HistoryIcon from "@mui/icons-material/History";
@@ -107,9 +106,6 @@ function Home() {
           {/* --------------------- */}
         </Paper>
       </Container>
-      <Suspense>
-        <Appreciate />
-      </Suspense>
     </>
   );
 }
