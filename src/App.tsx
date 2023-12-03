@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useMemo, useState,useEffect } from "react";
 import { Provider } from "react-redux";
 import { store } from "./RTK/store";
 
@@ -48,9 +48,18 @@ const router = createBrowserRouter([
 
 export default function App() {
   const [mode, setMode] = useState<"light" | "dark">("dark");
+
+  useEffect(() => {
+    const localMode = localStorage.getItem("colorMode");
+    if (localMode) {
+      setMode(localMode as "light" | "dark");
+    }
+  }, [])
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
+        localStorage.setItem("colorMode", mode === "light" ? "dark" : "light");
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
