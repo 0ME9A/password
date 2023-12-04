@@ -7,9 +7,9 @@ export interface SettingState {
 }
 
 const initialState: SettingState = {
-  dark: false,
-  salt: false,
-  instantCopy: false,
+  dark: localStorage.getItem("dark") === "true" ? true : false,
+  salt: localStorage.getItem("salt") === "true" ? true : false,
+  instantCopy: localStorage.getItem("instantCopy") === "true" ? true : false,
 };
 
 const settingProps = createSlice({
@@ -17,12 +17,15 @@ const settingProps = createSlice({
   initialState,
   reducers: {
     setTheme: (state, action: PayloadAction<boolean>) => {
+      localStorage.setItem("dark", action.payload.toString());
       return { ...state, dark: action.payload };
     },
     setSalt: (state, action: PayloadAction<boolean>) => {
+      localStorage.setItem("salt", action.payload.toString());
       return { ...state, salt: action.payload };
     },
     setInstantCopy: (state, action: PayloadAction<boolean>) => {
+      localStorage.setItem("instantCopy", action.payload.toString());
       return { ...state, instantCopy: action.payload };
     },
   },
