@@ -79,7 +79,7 @@ const ContributorsList = () => {
                   component="img"
                   alt="green iguana"
                   height="140"
-                  image={`https://github.com/@${item.login}.png`}
+                  image={`https://github.com/${item.login}.png`}
                 />
                 <CardContent sx={{ pb: 0 }}>
                   <Typography
@@ -104,7 +104,7 @@ const ContributorsList = () => {
                     size="small"
                     target="_blank"
                     variant="outlined"
-                    href={`https://github.com/@${item.login}`}
+                    href={`https://github.com/${item.login}`}
                   >
                     GitHub
                   </Button>
