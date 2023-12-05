@@ -96,7 +96,7 @@ const ContributorsList = () => {
                     size="small"
                     target="_blank"
                     variant="contained"
-                    href={`https://devfinder.ome9a.com/${item.login}`}
+                    href={`https://devfinder.ome9a.com/@${item.login}`}
                   >
                     View Profile
                   </Button>
