@@ -28,26 +28,42 @@ const generatePassword = (
   if (attributes.symbol) characters += charset.symbol;
   if (attributes.number) characters += charset.number;
 
-
-
-  // Ensure at least one character from each type is included, only if the length does not go over
-  const addCharacterOfType = (type:boolean, characters:string, maxLength:any) => {
-    return type && password.length < maxLength
-      ? characters[Math.floor(Math.random() * characters.length)]
+  const addCharacterOfType = (type: boolean, characters: string, maxLength: any) =>
+    type && password.length < maxLength
+      ? characters[Math.floor(getSecureRandom() * characters.length)]
       : '';
+
+  const getSecureRandom = () => {
+    const randomValues = new Uint32Array(1);
+    window.crypto.getRandomValues(randomValues);
+    return randomValues[0] / (0xffffffff + 1);
   };
-  
-  password += addCharacterOfType(attributes.upper, charset.upper, attributes.length) 
-  password += addCharacterOfType(attributes.lower, charset.lower, attributes.length)
-  password += addCharacterOfType(attributes.symbol, charset.symbol, attributes.length)
-  password += addCharacterOfType(attributes.number, charset.number, attributes.length)
+
+  const types = [
+    { type: attributes.upper, characters: charset.upper },
+    { type: attributes.lower, characters: charset.lower },
+    { type: attributes.symbol, characters: charset.symbol },
+    { type: attributes.number, characters: charset.number },
+  ];
+
+  // Shuffle the order of types randomly
+  for (let i = types.length - 1; i > 0; i--) {
+    const j = Math.floor(getSecureRandom() * (i + 1));
+    [types[i], types[j]] = [types[j], types[i]];
+  }
+
+  // Add characters of each type in the shuffled order
+  for (const { type, characters } of types) {
+    password += addCharacterOfType(type, characters, attributes.length);
+  }
+
   // Generate the rest of the password based on the remaining length
   let remainingLength = Array.isArray(attributes.length)
     ? attributes.length[0] - password.length
     : attributes.length - password.length;
 
   for (let i = 0; i < remainingLength; i++) {
-    password += characters[Math.floor(Math.random() * characters.length)];
+    password += characters[Math.floor(getSecureRandom() * characters.length)];
   }
 
   // Add salt if provided and position specified
