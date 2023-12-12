@@ -18,6 +18,23 @@ const generatePassword = (
   let password = "";
   let characters = "";
 
+  if (
+    !attributes.upper &&
+    !attributes.lower &&
+    !attributes.symbol &&
+    !attributes.number &&
+    attributes.salt.length === 0
+  ) {
+    return {
+      password: "",
+      strength: {
+        message: "No character types selected and no salt provided.",
+        color: "",
+        level: 0,
+      },
+    };
+  }
+
   // Add existing passwords to the characters pool
   existingPasswords.forEach((existingPassword) => {
     characters += existingPassword;
