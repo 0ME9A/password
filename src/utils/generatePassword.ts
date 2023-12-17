@@ -79,8 +79,10 @@ const generatePassword = (
     ? attributes.length[0] - password.length
     : attributes.length - password.length;
 
-  for (let i = 0; i < remainingLength; i++) {
-    password += characters[Math.floor(getSecureRandom() * characters.length)];
+  if(characters ){
+    for (let i = 0; i < remainingLength; i++) {
+      password += characters[Math.floor(getSecureRandom() * characters.length)];
+    }
   }
 
   // Add salt if provided and position specified
@@ -101,6 +103,7 @@ const generatePassword = (
     default:
       break;
   }
+
 
   // Calculate password strength
   const strength = passwordStrength(password);
