@@ -20,6 +20,9 @@ const ContributorsList = () => {
 
   const palette = theme.palette;
 
+  // Placeholder image URL
+  const placeholderImage = "https://via.placeholder.com/150";
+
   return (
     <Box
       component={"section"}
@@ -60,11 +63,11 @@ const ContributorsList = () => {
         <CircularProgress />
       ) : error ? (
         <Typography color="error">
-          Error: {!error ? error : "Unknown?"}
+          Error: {error ? error.toString() : "Unknown error"}
         </Typography>
       ) : (
         <Grid container spacing={2}>
-          {data?.map((item) => (
+          {data?.filter(item => item.login !== "dependabot[bot]").map((item) => (
             <Grid item md={4} sm={6} xs={12} key={item.login}>
               <Card
                 sx={{
@@ -75,12 +78,18 @@ const ContributorsList = () => {
                   },
                 }}
               >
-                <CardMedia
+               <CardMedia
                   component="img"
-                  alt="green iguana"
+                  alt={`${item.login}'s profile image`}
                   height="140"
                   image={`https://github.com/${item.login}.png`}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement; // Type assertion
+                    target.onerror = null; // Prevents looping
+                    target.src = placeholderImage; // Placeholder image
+                  }}
                 />
+
                 <CardContent sx={{ pb: 0 }}>
                   <Typography
                     gutterBottom
