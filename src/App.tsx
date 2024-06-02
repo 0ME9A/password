@@ -63,7 +63,7 @@ export default function App() {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    []
+    [mode]
   );
 
   const getDesignTokens = (mode: PaletteMode) => ({
