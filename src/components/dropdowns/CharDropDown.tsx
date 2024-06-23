@@ -14,7 +14,7 @@ export default function CharDropDown() {
     let whiteList = localStorage.getItem("whiteList") ? JSON.parse(localStorage.getItem("whiteList") as string) : charTypes;
 
 
-  return (  
+return (  
 
     <Box>
 

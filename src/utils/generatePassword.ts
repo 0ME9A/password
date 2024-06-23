@@ -10,8 +10,7 @@ const generatePassword = (
 ): ProPasswordReturnType => {
 
   let whiteList = localStorage.getItem("whiteList") ? JSON.parse(localStorage.getItem("whiteList") as string) : ["!@#$%^&*()_+-=[]{}|;:,.<>?"];
-  // "!@#$%^&*()_+-=[]{}|;:,.<>?"
-  console.log(whiteList);
+
   const charset = {
     upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     lower: "abcdefghijklmnopqrstuvwxyz",
