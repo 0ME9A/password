@@ -13,6 +13,7 @@ import { SETTINGS } from "../../RTK/type";
 
 import ThemeSwitch from "../../components/buttons/ThemeSwitch";
 import WindowBack from "../../components/buttons/WindowBack";
+import CharDropDown from "../../components/dropdowns/CharDropDown";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -39,11 +40,12 @@ function Settings() {
           position: "relative",
           top: 0,
           width: "100%",
-          // maxHeight: "600px",
+          maxHeight: "600px",
           height: "500px",
           transition: ".3s",
           zIndex: activeWindow.tab === SETTINGS ? 5 : 0,
           animationDuration: activeWindow.timer || 0,
+          overflow: "auto",
         }}
         className={`${
           activeWindow.tab === SETTINGS && "windowSlideStartRight"
@@ -121,7 +123,7 @@ function Settings() {
                 variant="h3"
                 sx={{ fontWeight: "bold", mt: 1, fontSize: "1rem" }}
               >
-                Advance Settings
+                Advanced Settings
               </Typography>
             </ListItem>
             <ListItem alignItems="flex-start">
@@ -174,6 +176,8 @@ function Settings() {
                 inputProps={{ "aria-label": "controlled" }}
               />
             </ListItem>
+
+            <CharDropDown></CharDropDown>
           </List>
         </Box>
       </Paper>
