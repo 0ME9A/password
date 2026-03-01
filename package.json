@@ -3,27 +3,27 @@
   "version": "2.6.1",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.15",
-    "@mui/material": "^5.14.15",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^5.18.0",
+    "@mui/material": "^5.18.0",
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.59",
-    "@types/react": "^18.2.33",
-    "@types/react-dom": "^18.2.14",
-    "axios": "^1.8.2",
+    "@types/node": "^16.18.126",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "axios": "^1.13.6",
     "localforage": "^1.10.0",
-    "match-sorter": "^6.3.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "match-sorter": "^6.3.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
-    "react-icons": "^4.11.0",
+    "react-icons": "^4.12.0",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.17.0",
+    "react-router-dom": "^6.30.3",
     "react-scripts": "5.0.1",
     "sort-by": "^1.2.0",
     "typescript": "^4.9.5",
@@ -54,6 +54,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-helmet": "^6.1.9"
+    "@types/react-helmet": "^6.1.11"
   }
 }
